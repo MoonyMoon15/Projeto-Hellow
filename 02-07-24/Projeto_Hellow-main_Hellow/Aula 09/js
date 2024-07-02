@@ -1,0 +1,29 @@
+function initMap() {
+    // Coordenadas de Blumenau
+    var blumenau = { lat: -26.9194, lng: -49.0661 };
+    // Locais dos eventos
+    var locaisEventos = [
+        { lat: -26.918392548988162, lng: -49.06811194724816, titulo: 'Show Pink Floyd', descricao: 'Show do Pink Floyd, O show conta com grandes sucessos em seu repertório, tais como: “Mother”, “Wish You Were Here”, “Time”, “Another Brick In The Wall”, dentre outros. O show irá ocorrer dia 28 de julho de 2024.' },
+        { lat: -26.915342377186224, lng: -49.08460813005426, titulo: 'Comics Experience', descricao: 'Comics Experience, evento geek e cultural que irá ocorrer dia 27 ao dia 28 do mês de agosto de 2024. ' },
+        { lat: -26.872602071439868, lng: -49.094413372384025, titulo: 'Mamonas Assassinas', descricao: 'Show em memória e comemoração da banda Mamonas Assassinas, o evento irá ocorrer dia 01 de agosto de 2024.' }
+    ];
+    // Criação do mapa
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: blumenau
+    });
+    // Adicionando marcadores no mapa
+    locaisEventos.forEach(function (evento) {
+        var marker = new google.maps.Marker({
+            position: { lat: evento.lat, lng: evento.lng },
+            map: map,
+            title: evento.titulo
+        });
+        var infowindow = new google.maps.InfoWindow({
+            content: '<h5>' + evento.titulo + '</h5><p>' + evento.descricao + '</p>'
+        });
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+        });
+    });
+}
